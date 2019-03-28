@@ -1,0 +1,48 @@
+﻿@model Student
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Apply</title>
+</head>
+<body>
+    <h1 style="text-align:center;">Course/Apply  view</h1>
+
+    <form method="post" asp-action="apply">
+        <p>
+            <label asp-for="Name">Name: </label>
+            <input asp-for="Name" />
+        </p>
+
+        <p>
+            <label asp-for="Email">Email: </label>
+            <input asp-for="Email" />
+        </p>
+
+        <p>
+            <label asp-for="Phone">Phone: </label>
+            <input asp-for="Phone" />
+        </p>
+
+        <p>
+            <label asp-for="WillAttend">WillAttend</label>
+            <select asp-for="WillAttend">
+                <option value="">Select an option.</option>
+                <option value="true">I will attend.</option>
+                <option value="false">I will not attend.</option>
+            </select>
+        </p>
+
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+
+    </form>
+
+</body>
+</html>
