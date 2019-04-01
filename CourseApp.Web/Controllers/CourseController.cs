@@ -19,7 +19,8 @@ namespace CourseApp.Web.Controllers
         //Course/List
         public ViewResult List()
         {
-            return View();
+            var liste = Repository.Students.Where(x => x.WillAttend == true).ToList();
+            return View(liste);
         }
 
         public ViewResult Apply()
@@ -33,8 +34,15 @@ namespace CourseApp.Web.Controllers
             //ASP.NET MVC yapısında FormCollection kullanarak Html.Helper ile yolladığımız form nesnesinden istediğimiz verileri alıp entity'mize göre eşitleme işlemi yapıyorduk. .Net Core 2'de ise TagHelper ile form yapısında asp-for içerisine Model olarak yolladığımız property'lerimiz için oluşması gereken inputlar otomatik oluşuyor, bu verileri POST etmek istediğimizde ise HttpPost metodumuzda FormCollection nesnesi parametre olarak almak yerine, Model Binding yapısı sayesinde View üzerinden yollanan entity tipinde parametre vererek entity nesnesini direkt olarak alabiliyoruz.
             //student entity'sine ait property verileri veri tabanına kayıt edilebilir.
 
-            Repository.AddStudent(student);
-            return View("Thanks",student);
+            if (ModelState.IsValid)
+            {
+                Repository.AddStudent(student);
+                return View("Thanks", student);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
